@@ -7,11 +7,26 @@ namespace SudokuAnalizer
 
         static int counter = 0;
 
+        public static int[,] GenerateSudokuGrid()
+        {
+            int[,] grid;
+            do
+            {
+                grid = new int[9, 9];
+                Sudoku.FillSudoku(grid);
+            } while (!Sudoku.IsValid(grid));
+
+            return grid;
+        }
+
+
+
+
         public static void FillSudoku(int[,] grid)
         {
             if (grid.GetLength(0) != grid.GetLength(1)) throw new ArgumentException("grid doesn't have the same dimention size");
 
-            int N = 9 * 9;
+            int N = grid.GetLength(0) * grid.GetLength(1);
             for(int i = 0; i < N; i++)
             {
                 int row = i / 9;
@@ -150,7 +165,7 @@ namespace SudokuAnalizer
                                     else
                                     {
                                         FillSudoku(grid);
-                                        return;
+                                        
                                     }
                                 }
                             }
@@ -183,7 +198,67 @@ namespace SudokuAnalizer
             return true;
         }
 
+        public static bool IsValid(int[,] grid)
+        {
+            if (grid == null) return false; //array is null or row is null
+            if (grid.GetLength(0) != grid.GetLength(1)) return false; //NxN size
+            foreach (var item in grid)
+            {
+                if (item <= 1 && item > grid.GetLength(0)) return false;
+            }
+            if (Math.Sqrt((double)grid.Length) != Math.Floor(Math.Sqrt((double)grid.Length))) return false; //square root of size is integer
 
+            //creating sequence
+            string seq = "123456789";
+
+            //checking rows
+            List<int[]> Rows = new List<int[]>();
+            for(int i = 0; i < grid.GetLength(0); i++)
+            {
+                Rows.Add(grid.SliceRow(i).ToArray());
+            }
+            var sortedStrRows = Rows.Select(x => string.Join("", x.OrderBy(x => x).ToList()));
+            if (!(sortedStrRows.All(x => x == seq))) return false;
+
+            //checking columns
+
+            var sortedSrCols = Enumerable.Range(0, grid.GetLength(0)).Select(x =>
+            {
+                List<int> list = new List<int>();
+                for (int i = 0; i < grid.GetLength(0); i++)
+                {
+                    list.Add(grid[i, x]);
+                }
+
+                return string.Join("", list.OrderBy(x => x));
+            });
+
+            if (!(sortedSrCols.All(x => x == seq))) return false;
+
+            //checking squares
+            List<List<int>> list = new List<List<int>>();
+            int N = grid.GetLength(0), square = (int)Math.Sqrt(grid.GetLength(0));
+
+            for (int i = 0; i < N; i += square)
+            {
+                for (int j = 0; j < N; j += square)
+                {
+                    List<int> sq = new List<int>();
+                    for (int k = i; k < i + square; k++)
+                    {
+                        for (int l = j; l < j + square; l++)
+                        {
+                            sq.Add(grid[k,l]);
+                        }
+                    }
+                    list.Add(sq);
+                }
+            }
+            var sortedSrSquares = list.Select(x => string.Join<int>("", x.OrderBy(x => x).ToList()));
+            if (!(sortedSrSquares.All(x => x == seq))) return false;
+
+            return true;
+        }
 
 
 
