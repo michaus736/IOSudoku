@@ -1,17 +1,41 @@
 ﻿using IOSudoku.Models;
 using Microsoft.AspNetCore.Mvc;
+using SudokuAnalizer;
 using System.Diagnostics;
 
 namespace IOSudoku.Controllers
 {
-    public class HomeController : Controller
+    public class GameController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<GameController> _logger;
+        List<string> difficulty = new() { "easy", "medium", "hard", "extreme" };
 
-        public HomeController(ILogger<HomeController> logger)
+        public GameController(ILogger<GameController> logger)
         {
             _logger = logger;
         }
+
+        public IActionResult Game()
+        {
+            var difficultyLevel = Request.Form["difficulty"][0];
+
+            var orginalGrid = Sudoku.GenerateSudokuGrid();
+
+            GameModel model = new GameModel();
+            model.Difficulty = difficultyLevel;
+            model.OriginalGrid = orginalGrid;
+            return View(model);
+        }
+
+        public IActionResult DifficultySelect()
+        {
+            //todo: Entity model to game statistics
+            
+            
+
+            return View(difficulty);
+        }
+
 
         public IActionResult Index()
         {

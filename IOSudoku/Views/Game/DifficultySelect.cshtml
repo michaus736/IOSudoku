@@ -1,0 +1,18 @@
+﻿@model IEnumerable<string>?
+@{
+    ViewData["Title"] = "Difficulty Select";
+}
+
+<h1>DifficultySelect</h1>
+@if (@Model is not null)
+{
+    <form asp-controller="Game" asp-action="Game">
+    <select name="difficulty">
+    @foreach (var item in @Model)
+    {
+        <option value="@item">@item</option>
+    }  
+    </select>
+    <button type="submit">Graj</button>
+    </form>
+}

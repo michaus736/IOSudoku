@@ -182,7 +182,7 @@ namespace SudokuAnalizer
         /// <summary>
         /// checks if grid is already filled with numbers
         /// </summary>
-        /// <param name="grid"></param>
+        /// <param name="grid">square grid to check</param>
         /// <returns>returns true if grid is full, false otherwise</returns>
         /// <exception cref="ArgumentException">throws exception, if grid does't have the same dimention</exception>
         public static bool CheckIfFull(int[,] grid)

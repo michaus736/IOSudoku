@@ -156,7 +156,7 @@ def fillGrid(grid):
               else:  
                 square=[grid[i][6:9] for i in range(6,9)]
             #Check that this value has not already be used on this 3x3 square
-            print(square[0]+square[1]+square[2])
+            #print(square[0]+square[1]+square[2])
             if not value in (square[0] + square[1] + square[2]):
               grid[row][col]=value
               if checkGrid(grid):
@@ -169,6 +169,8 @@ def fillGrid(grid):
     
 #Generate a Fully Solved Grid
 fillGrid(grid)
+for i in range(0,9):
+  print(grid[i])
 drawGrid(grid) 
 myPen.getscreen().update()
 sleep(1)
@@ -210,5 +212,7 @@ while attempts>0:
   myPen.clear()
   drawGrid(grid) 
   myPen.getscreen().update()
-
+for i in range(0,9):
+  print(grid[i])
+#print(grid)
 print("Sudoku Grid Ready")
