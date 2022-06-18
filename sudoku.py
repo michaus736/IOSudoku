@@ -171,6 +171,7 @@ def fillGrid(grid):
 fillGrid(grid)
 for i in range(0,9):
   print(grid[i])
+print("\n")
 drawGrid(grid) 
 myPen.getscreen().update()
 sleep(1)

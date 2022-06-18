@@ -27,38 +27,38 @@ namespace SudokuAnalizer
             if (grid.GetLength(0) != grid.GetLength(1)) throw new ArgumentException("grid doesn't have the same dimention size");
 
             int N = grid.GetLength(0) * grid.GetLength(1);
-            for(int i = 0; i < N; i++)
+            for (int i = 0; i < N; i++)
             {
                 int row = i / 9;
                 int col = i % 9;
-                if(grid[row,col] == 0)
+                if (grid[row, col] == 0)
                 {
                     int[] numbers = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
                     numbers = numbers.Shuffled().ToArray();
                     foreach (var value in numbers)
                     {
-                        
+
                         if (!grid.SliceRow(row).Any(item => item == value))
                         {
-                            if(!grid.SliceColumn(col).Any(item => item == value))
+                            if (!grid.SliceColumn(col).Any(item => item == value))
                             {
                                 int[] square = new int[9];
                                 List<int> list = new List<int>();
                                 int squareCounter = 0;
-                                if(row < 3)
+                                if (row < 3)
                                 {
-                                    if(col < 3)
+                                    if (col < 3)
                                     {
-                                        for(int loop = 0; loop < 3; loop++)
+                                        for (int loop = 0; loop < 3; loop++)
                                         {
-                                            for(int innerLoop=0;innerLoop < 3; innerLoop++)
+                                            for (int innerLoop = 0; innerLoop < 3; innerLoop++)
                                             {
                                                 square[squareCounter++] = grid[loop, innerLoop];
                                                 list.Add(grid[loop, innerLoop]);
                                             }
                                         }
                                     }
-                                    else if(col < 6)
+                                    else if (col < 6)
                                     {
                                         for (int loop = 0; loop < 3; loop++)
                                         {
@@ -165,7 +165,7 @@ namespace SudokuAnalizer
                                     else
                                     {
                                         FillSudoku(grid);
-                                        
+
                                     }
                                 }
                             }
@@ -174,7 +174,7 @@ namespace SudokuAnalizer
                     break;
                 }
             }
-            
+
 
 
 
@@ -188,9 +188,9 @@ namespace SudokuAnalizer
         public static bool CheckIfFull(int[,] grid)
         {
             if (grid.GetLength(0) != grid.GetLength(1)) throw new ArgumentException("grid doesn't have the same dimention");
-            for(int i = 0; i < grid.GetLength(0); i++)
+            for (int i = 0; i < grid.GetLength(0); i++)
             {
-                for(int j = 0; j < grid.GetLength(1); j++)
+                for (int j = 0; j < grid.GetLength(1); j++)
                 {
                     if (grid[i, j] == 0) return false;
                 }
@@ -213,7 +213,7 @@ namespace SudokuAnalizer
 
             //checking rows
             List<int[]> Rows = new List<int[]>();
-            for(int i = 0; i < grid.GetLength(0); i++)
+            for (int i = 0; i < grid.GetLength(0); i++)
             {
                 Rows.Add(grid.SliceRow(i).ToArray());
             }
@@ -248,7 +248,7 @@ namespace SudokuAnalizer
                     {
                         for (int l = j; l < j + square; l++)
                         {
-                            sq.Add(grid[k,l]);
+                            sq.Add(grid[k, l]);
                         }
                     }
                     list.Add(sq);
@@ -260,6 +260,9 @@ namespace SudokuAnalizer
             return true;
         }
 
+        public static int[,]? CreateGameGrid(int[,] originalGrid, int numbersToErase, int attempts = 8){
+            return null;
+        }
 
 
     }
