@@ -18,12 +18,35 @@ namespace IOSudoku.Controllers
         public IActionResult Game()
         {
             var difficultyLevel = Request.Form["difficulty"][0];
+            Random random = new Random();
+            int toErase;
+            switch (difficultyLevel)
+            {
+                case "easy":
+                    toErase = random.Next(10, 20);
+                    break;
+                case "medium":
+                    toErase = random.Next(30, 40);
+                    break;
+                case "hard":
+                    toErase = random.Next(45, 55);
+                    break;
+                case "extreme":
+                    toErase = random.Next(60, 75);
+                    break;
+                default:
+                    toErase = random.Next(10, 20);
+                    break;
+            }
+
 
             var orginalGrid = Sudoku.GenerateSudokuGrid();
+            var gameGrid = Sudoku.CreateGameGrid(orginalGrid, toErase);
 
             GameModel model = new GameModel();
             model.Difficulty = difficultyLevel;
             model.OriginalGrid = orginalGrid;
+            model.GameGrid = gameGrid;
             return View(model);
         }
 
