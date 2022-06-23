@@ -1,39 +1,32 @@
 using SudokuAnalizer;
 using System.Linq;
-namespace TestProject
+namespace TestProject;
+
+public class UnitTest
 {
-    public class UnitTest
+    [Fact]
+    public void GenerateGridTest()
     {
-        [Fact]
-        public void GenerateGridTest()
-        {
 
-            var grid = Sudoku.GenerateSudokuGrid();
+        var grid = Sudoku.GenerateSudokuGrid();
 
-            Assert.True(Sudoku.IsValid(grid));
-        }
+        Assert.True(Sudoku.IsValid(grid));
+    }
 
-        [Fact]
-        public void CreateGameGrid()
-        {
-            var grid = Sudoku.GenerateSudokuGrid();
-            int toErase = 15;
+    [Fact]
+    public void CreateGameGrid()
+    {
+        var grid = Sudoku.GenerateSudokuGrid();
+        int toErase = 40;
 
-            var gameGrid = Sudoku.CreateGameGrid(grid, toErase);
-            if (gameGrid == null) throw new Exception();
+        var gameGrid = Sudoku.CreateGameGrid(grid, toErase);
+        if (gameGrid == null) throw new Exception();
 
 
-            int zeros = 0;
-            for(int i = 0; i < gameGrid.GetLength(0); i++)
-            {
-                for(int j=0; j < gameGrid.GetLength(1); j++)
-                {
-                    if (gameGrid[i,j] == 0) zeros++;
-                }
-            }
+        int zeros = gameGrid.Count2D(0);
+        
 
-            Assert.True(toErase==zeros);
+        Assert.True(toErase==zeros);
 
-        }
     }
 }

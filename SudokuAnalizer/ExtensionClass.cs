@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SudokuAnalizer
 {
-    internal static class ExtensionClass
+    public static class ExtensionClass
     {
         public static IEnumerable<T> SliceRow<T>(this T[,] array, int row)
         {
@@ -22,6 +22,21 @@ namespace SudokuAnalizer
             {
                 yield return array[i, column];
             }
+        }
+
+        public static int Count2D(this int[,] array , int element)
+        {
+            if (array is null) throw new ArgumentNullException("array is null");
+            int zeros = 0;
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    if (array[i, j] == element)
+                        zeros++;
+                }
+            }
+            return zeros;
         }
 
     }
