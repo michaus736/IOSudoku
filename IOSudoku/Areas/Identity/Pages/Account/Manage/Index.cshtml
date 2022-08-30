@@ -4,11 +4,16 @@
     ViewData["Title"] = "Profile";
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
-
+<div style="float:right;">
+    <img src="~/lib/bootstrap/dist/css/profile.png" style="width:250px;height:250px;" />
+</div>
 <h3>@ViewData["Title"]</h3>
 <partial name="_StatusMessage" for="StatusMessage" />
+
 <div class="row">
+    
     <div class="col-md-6">
+        
         <form id="profile-form" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-floating">

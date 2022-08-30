@@ -2,18 +2,66 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center" >
+    <i><h1 class="display-4">Welcome to the world of Sudoku</h1></i>
+    <div style="position:left;">
+    <img src="/lib/bootstrap/dist/css/sudo.png" />
+    <img src="/lib/bootstrap/dist/css/sudo2.png" />
+    </div>
+    @if (Context.isLogged())
+    
+    {
+        <h4>
+            <hr>
+        <p>logged</p>
+        
+            <center><a style="font-size:50px;font-family:Cursive" class="nav-link text-dark" href="@Url.ActionLink("DifficultySelect", "Game")">PLAY</a></center>
+            <hr>
+        </h4>
+    }
+    else
+    {
+        <h4>
+            <hr>
+            <center><p>You are logged in as guest</p></center>
+            <center><a style="font-size:50px;font-family:Cursive" class="nav-link text-dark" href="@Url.ActionLink("DifficultySelect", "Game")">PLAY AS A GUEST</a></center>
+            <hr>
+        </h4>
+    }
+    <br />
+    
+
+
+    <h2><b>Play Sudoku for free now!</b></h2>
+    <p style="text-align: left;font-size:18px;">
+        Sudoku is one of the most popular puzzle games of all time. The goal of Sudoku is to fill a 9x9 grid with numbers so that each row, column and 3x3 section contains all the numbers from 1 to 9. As a logic puzzle, it is also an excellent brain training game. If you play Sudoku every day, you will soon notice an improvement in your concentration and overall brain performance. Start the game now. Sudoku will become your favorite free online game in no time.
+    </p>
+
+    <h2><b>About Sudoku</b></h2>
+    <p style="text-align: left;font-size:18px;">
+        The popular Japanese puzzle game Sudoku is based on the logical arrangement of numbers. Sudoku, this online puzzle game, requires no calculations or special math skills; all you need is brain and concentration
+    </p>
+
+    <h2><b>How to play Sudoku</b></h2>
+    <p style="text-align: left;font-size:18px;">
+        The goal of Sudoku is to fill the 9x9 grid with numbers so that each row, column, and 3x3 section contain numbers from 1 to 9. At the beginning of the game, the 9x9 grid will contain some fields already filled. Your task is to use logic to complete the missing numbers and fill the entire grid. Don't forget that traffic is invalid if:<br />
+
+        <br />-a line contains more than one of the same numbers from 1 to 9
+        <br />-some column has more than one of the same numbers from 1 to 9
+        <br />-in some 3x3 grid there is more than one of the same numbers from 1 to 9
+    </p>
+    <h2><b>Sudoku tips</b></h2>
+    <p style="text-align: left;font-size:18px;">
+
+        Sudoku will become a real puzzle fun once you have mastered it. Although just learning to play Sudoku can be a bit scary for beginners. So, if you are a complete beginner, here are some Sudoku tips you can use to improve your Sudoku skills in this game.
+        <br />
+        <br />-Tip # 1: Search for rows, columns from 3x3 section containing 5 or more numbers. Examine the remaining blank cells, trying to use numbers that have not been used. In many cases, you will find numbers that can only be put in one place if you take into account the rest of the numbers that are already in their row or column and 3x3 grid.
+        <br /><br />- Tip # 2: Visually divide the grid into 3 columns and 3 rows. Each large column will have 3 3x3 grids and each row will also have 3 3x3 grids. Now look for columns or grids that have 2 of the same numbers. Logically, the third copy of the same number must be in the only 9-cell section. Take a look at each of the remaining 9 items and see if you can find the location for the missing number.
+        Now that you know a little more about Sudoku, play this free online game and enjoy it.
+    </p>
+    
+    
+
 </div>
 
 
-@if (Context.isLogged())
-{
-    <p>logged</p>
-    <a  href="@Url.ActionLink("DifficultySelect", "Game")">Zagraj</a>
-}
-else{
-    <p>guest</p>
-    <a  href="@Url.ActionLink("DifficultySelect", "Game")">Zagraj jako gość</a>
-}

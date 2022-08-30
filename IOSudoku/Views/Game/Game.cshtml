@@ -5,3 +5,47 @@
 
 <h1>Game</h1>
 <p>@Model.Difficulty</p>
+
+@*<div id>
+
+    @for (var i = 0; i < Model.OriginalGrid.GetLength(0); i++)
+    {
+        <div>
+        @for (var j = 0; j < Model.OriginalGrid.GetLength(1); j++){
+
+           <span>
+               @Model.OriginalGrid[i,j]
+           </span>
+          
+        }
+        </div>
+    }
+
+</div>*@
+
+<div>
+
+    @for (var i = 0; i < Model.GameGrid.GetLength(0); i++)
+    {
+        <center><div style="font-size:50px;position:center;display: grid; grid-template-columns: repeat(9, 50px);
+     grid-template-rows: repeat(9, 10px) ">
+            @for (var j = 0; j < Model.GameGrid.GetLength(1); j++)
+            {
+
+                <span style="align:left">@if(Model.GameGrid[i,j]==0){
+                            <input style="width: 50px;"type="number">
+                        }
+                        else{
+
+                           
+                            @Model.GameGrid[i,j]
+                            
+                }
+                </span>
+
+            }
+            </div>
+        </center>
+    }
+
+</div>

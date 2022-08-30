@@ -14,5 +14,7 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    font-family: Mood;
+    margin-bottom: 60px;
+   background-image:url("../lib/bootstrap/dist/css/tlo22.jpg");
 }
