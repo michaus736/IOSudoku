@@ -8,7 +8,7 @@ namespace IOSudoku.Controllers
     public class GameController : Controller
     {
         private readonly ILogger<GameController> _logger;
-        List<string> difficulty = new() { "easy", "medium", "hard", "extreme" };
+        List<string> difficulty = new() { "Easy", "Medium", "Hard", "Extreme" };
 
         public GameController(ILogger<GameController> logger)
         {
@@ -22,16 +22,16 @@ namespace IOSudoku.Controllers
             int toErase;
             switch (difficultyLevel)
             {
-                case "easy":
+                case "Easy":
                     toErase = random.Next(10, 20);
                     break;
-                case "medium":
+                case "Medium":
                     toErase = random.Next(30, 40);
                     break;
-                case "hard":
+                case "Hard":
                     toErase = random.Next(45, 55);
                     break;
-                case "extreme":
+                case "Extreme":
                     toErase = random.Next(60, 75);
                     break;
                 default:

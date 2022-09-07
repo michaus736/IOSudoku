@@ -4,9 +4,41 @@
 @{
     ViewData["Title"] = "Game";
 }
+<center>
+    <p style="font-family:sans-serif;font-size:25px;">
 
-<p>@Model.Difficulty</p>
+        You play on the level
+<b>@Model.Difficulty</b></p></center>
+<center>
+    <div style="font-family:sans-serif;font-size:25px;">
+    <label id="minutes">00</label>
+    <label id="colon">:</label>
+    <label id="seconds">00</label>
+    <script type="text/javascript">
+        var minutesLabel = document.getElementById("minutes");
+        var secondsLabel = document.getElementById("seconds");
+        var totalSeconds = 0;
+        let a = setInterval(setTime, 1000);
 
+        function setTime() {
+            ++totalSeconds;
+            secondsLabel.innerHTML = pad(totalSeconds % 60);
+            minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+        }
+
+        function pad(val) {
+            var valString = val + "";
+            if (valString.length < 2) {
+                return "0" + valString;
+            }
+            else {
+                return valString;
+            }
+        }
+    </script>
+    </div>
+</center>
+<br />
 
 <script>
     let xd = 0;
@@ -27,13 +59,14 @@
                 else {
                 element.style.color = "red";
                 xd++;
-                document.getElementById("demo3").innerHTML = `Liczba błędów ${xd}`;
+            document.getElementById("demo3").innerHTML = `The number of errors: `;
+                document.getElementById("demo4").innerHTML =`${xd}`;
                 //console.log(xd)
             }
 
             if(xd>=3){
             clearInterval(a)
-            document.getElementById("demo").innerHTML = "koniec gry";
+            document.getElementById("demo").innerHTML = "End of the game";
             const inputs=document.querySelectorAll(".input");
             inputs.forEach((input,index)=>{
                 input.setAttribute("disabled","");
@@ -58,7 +91,7 @@
                 info++;
                 if(info>=81){
                         clearInterval(a)
-                        document.getElementById("demo2").innerHTML = `wygrałes twoj czas to : ${pad(parseInt(totalSeconds / 60))}:${pad(totalSeconds % 60)}`;
+                        document.getElementById("demo2").innerHTML = `You won your time is: ${pad(parseInt(totalSeconds / 60))}:${pad(totalSeconds % 60)}`;
                         
                         const inputs = document.querySelectorAll(".input");
                         inputs.forEach((input, index) => {
@@ -85,6 +118,8 @@
         xd = 0;
         document.getElementById("demo").innerHTML = "";
         document.getElementById("demo2").innerHTML = "";
+        document.getElementById("demo3").innerHTML = "";
+        document.getElementById("demo4").innerHTML = "";
 
         clearInterval(a)
         a = setInterval(setTime, 1000);
@@ -112,7 +147,7 @@
             -moz-appearance: textfield;
         }
     </style>
-<div id>
+@*<div id>
 
     @for (var i = 0; i < Model.OriginalGrid.GetLength(0); i++)
     {
@@ -127,7 +162,7 @@
         </div>
     }
 
-</div>
+</div>*@
 <form>
 <div>
     
@@ -157,41 +192,18 @@
                     
             </div>
         </center>
-            <div style="float:right">
-                <p id="demo"></p>
-                <p id="demo2"></p>
-                <p id="demo3"></p>
+            <div style="position:absolute;top:250px;right:250px">
+                <p style="text-decoration:none;font-family:sans-serif;font-size:40px;color:black"; id="demo"></p>
+                <p style="text-decoration:none;font-family:sans-serif;font-size:25px;color:black"; id="demo2"></p>
+                <div style="display:flex;">
+                    <p style="margin-right:10px;text-decoration:none;font-family:sans-serif;font-size:25px;color:black" ; id="demo3"></p>
+                    <p style="text-decoration:none;font-family:sans-serif;font-size:25px;color:red" ; id="demo4"></p></div>
             </div>
-    }
-        <input type="reset" value="Clear board" onclick="dick3()">
-        <a href="https://localhost:9000/Game/DifficultySelect">Change Difficult level</a><br />
-        <a href="https://localhost:9000/">Quit</a>
-        <div>
-            <label id="minutes">00</label>
-            <label id="colon">:</label>
-            <label id="seconds">00</label>
-            <script type="text/javascript">
-                var minutesLabel = document.getElementById("minutes");
-                var secondsLabel = document.getElementById("seconds");
-                var totalSeconds = 0;
-                let a=setInterval(setTime, 1000);
-
-                function setTime() {
-                    ++totalSeconds;
-                    secondsLabel.innerHTML = pad(totalSeconds % 60);
-                    minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
-                }
-
-                function pad(val) {
-                    var valString = val + "";
-                    if (valString.length < 2) {
-                        return "0" + valString;
-                    }
-                    else {
-                        return valString;
-                    }
-                }
-            </script>
-        </div>
+    }<br />
+        <center style="display:flex;justify-content:space-evenly;">
+            <input style ="text-decoration:none;font-family:sans-serif;font-size:25px;color:black" type="reset" value="Reset board" onclick="dick3()">
+            <a style="text-decoration:none;font-family:sans-serif;font-size:25px;color:black"; href="https://localhost:9000/Game/DifficultySelect">Change Difficult level</a>
+            <a style="text-decoration:none;font-family:sans-serif;font-size:25px;color:black" href="https://localhost:9000/">Quit</a>
+        </center>
 </div>
 </form>
