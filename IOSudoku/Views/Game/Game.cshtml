@@ -47,7 +47,7 @@
     var jsonString = @JsonConvert.SerializeObject(Model.OriginalGrid);
     var jsonString2 = @JsonConvert.SerializeObject(Model.GameGrid);
     
-    function dick(x,i,j){
+    function table(x,i,j){
         
         const element = document.getElementById(`c${i}r${j}`)
         
@@ -114,7 +114,7 @@
 
     }
 
-    const dick3 = () => {
+    const docs = () => {
         xd = 0;
         document.getElementById("demo").innerHTML = "";
         document.getElementById("demo2").innerHTML = "";
@@ -176,7 +176,7 @@
             {
                         
                 <div style="border: 1px solid black; height: 80px">@if(Model.GameGrid[i,j]==0){
-                                <input class="input" id="@("c"+ i.ToString() + "r" + j.ToString())" style="width: 50px; height: 80px; outline: none; border: none; border-bottom: 2px solid black ; box-shadow: none;text-align: center;" type="number" min="1" max="9" onchange="dick(this.value,@i,@j)">
+                                <input class="input" id="@("c"+ i.ToString() + "r" + j.ToString())" style="width: 50px; height: 80px; outline: none; border: none; border-bottom: 2px solid black ; box-shadow: none;text-align: center;" type="number" min="1" max="9" onchange="table(this.value,@i,@j)">
 
                     }
                         else{
@@ -201,7 +201,7 @@
             </div>
     }<br />
         <center style="display:flex;justify-content:space-evenly;">
-            <input style ="text-decoration:none;font-family:sans-serif;font-size:25px;color:black" type="reset" value="Reset board" onclick="dick3()">
+            <input style ="text-decoration:none;font-family:sans-serif;font-size:25px;color:black" type="reset" value="Reset board" onclick="docs()">
             <a style="text-decoration:none;font-family:sans-serif;font-size:25px;color:black"; href="https://localhost:9000/Game/DifficultySelect">Change Difficult level</a>
             <a style="text-decoration:none;font-family:sans-serif;font-size:25px;color:black" href="https://localhost:9000/">Quit</a>
         </center>
